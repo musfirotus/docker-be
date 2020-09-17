@@ -1,0 +1,26 @@
+version: "3.7"
+# Version of docker compose
+services:
+    mysql:
+        container_name: dbcompose2
+        image: mysql:latest
+        environment: 
+            - MYSQL_ROOT_PASSWORD=fira1234
+            - MYSQL_DATABASE=simple_wms
+        ports:
+            - 1122:3306
+        networks:
+            - network1
+    simplewms:
+        container_name: "simplewms"
+        image: musfirotus/dockerbackend:1.0
+        ports: 
+            - 2211:3000
+        depends_on: 
+            - mysql
+        command: npm install
+        networks: 
+            - network1
+networks: 
+    network1:
+        name: network1
